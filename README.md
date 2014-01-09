@@ -80,7 +80,7 @@ Each `$sometimes` rule needs to contain all the parameters that the `sometimes()
 But there's still a little magic left to be done! ConcreteValidator needs to implement that callback - we can do it just like this:
 
     /**
-     * The first name is required, and we only need the middle name if the last name was also given.
+     * We only need the middle name if the last name was also given.
      * Yes, that is absurd.
      * @param $input
      * @return boolean

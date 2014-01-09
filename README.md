@@ -1,6 +1,6 @@
 ##Decoupled Validation With Laravel's `sometimes()` method
 
-I learned a ton reading Chris Fidao's book "[Implementing Laravel](https://leanpub.com/implementinglaravel)", and I followed his pattern for form validation very closely in building my first significant Laravel 4 application. Actually, it's the first significant application I've built from the ground up in any framework *whatsoever*, so it feels like my baby and I'm proud of every step it takes. 
+I learned a ton reading Chris Fidao's book "[Implementing Laravel](https://leanpub.com/implementinglaravel)", and I followed his pattern for form validation very closely in building my first significant Laravel 4 application. Actually, it's the first significant application I've built from the ground up in any framework *whatsoever*, so it feels like my baby and I'm proud of every little step it takes. 
 
 Of course, sooner or later it was bound to happen that I'd run into a problem that wasn't covered by the thing I copied out of a book. And so it came to pass. The problem was, I needed to use the `sometimes()` method of Laravel's validation class, and I was finding it tough to wrap my head around how to make it happen.
 

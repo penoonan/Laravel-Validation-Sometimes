@@ -48,7 +48,7 @@ See the problem? The validator is "made" (that is, the `make()` method is invoke
 
 Let's take a closer look at the usage of that `sometimes()` function, shall we:
 
-    $v->sometimes(array('reason', 'cost'), 'required', function($input)
+    $validator->sometimes(array('reason', 'cost'), 'required', function($input)
     {
         return $input->games >= 100;
     });

@@ -24,7 +24,7 @@ In Fidao's example, ConcreteValidator's `$rules` and `$messages` are simply defi
 
 ###When is `sometimes()`?
 
-Unlike defining rules and messages or even extending the Validator class with custom rules of your own, the `sometimes()` method cannot be called on the Validator Factory - it can only be called on a concrete instance of the class. But since AbstractValidator only called `make()` *inside* the `passes()` method, there was no simply no room for ConcreteValidator to insert a call to `sometimes()`. Let's take a peek:
+Unlike defining rules and messages or even extending the Validator class with custom rules of your own, the `sometimes()` method cannot be called on the Validator Factory - it can only be called on a concrete instance of the class. But since AbstractValidator only called `make()` *inside* the `passes()` method, there was simply no room for ConcreteValidator to insert a call to `sometimes()`. Let's take a peek:
 
     public function passes() 
     {
@@ -42,7 +42,7 @@ Unlike defining rules and messages or even extending the Validator class with cu
         return true;
     }
 
-The validator is made (that is, the `make()` method is invoked on the injected factory instance), and it instantly calls `passes()` --- well, in this case, it calls `fails()`.  The entire body of the `fails()` function is `return !passes();`. So it's the same diff.
+See the problem? The validator is "made" (that is, the `make()` method is invoked on the injected factory instance), and it instantly calls `passes()` --- well, in this case, it calls `fails()`.  The entire body of the `fails()` function is `return !passes();`. So it's the same diff.
 
 ###A closer look at `sometimes()`
 

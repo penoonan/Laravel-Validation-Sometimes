@@ -1,13 +1,12 @@
 <?php
-namespace Estimator\Service\Validation;
 
-interface ValidableInterface {
+interface ValidatorInterface {
 
   /**
    * Add data to validate
    *
    * @param array
-   * @return \Estimator\Service\Validation\ValidableInterface
+   * @return ValidatorInterface
    */
   public function with(array $input);
 
@@ -25,10 +24,4 @@ interface ValidableInterface {
    */
   public function errors();
 
-  /**
-   * Provides access to an instantiated validator's "sometimes" method
-   * @param $sometimes
-   * @return void
-   */
-  public function sometimes($sometimes);
 }

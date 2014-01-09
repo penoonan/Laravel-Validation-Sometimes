@@ -67,9 +67,9 @@ Each `$sometimes` rule needs to contain all the parameters that the `sometimes()
 
     protected $sometimes = array(
         array(
-            'field' => 'example_field',
-            'rule' => 'example_rule',
-            'callback' => 'exampleCallback'
+            'field' => 'last_name',
+            'rule' => 'required',
+            'callback' => 'checkLastNameIsRequired'
         ),
     );
 
@@ -110,4 +110,4 @@ Finally, we need to tell the AbstractValidator how to handle any `sometimes()` r
         return true;
     }
 
-And that did it! So there you have it, see the example files to see it all fleshed out. Thanks for reading!
+And that did it! So there you have it, peruse the included files to see it all fleshed out. There are, of course, many ways to peel a tomato, so if you've got suggested improvements, let me know. Thanks for reading!

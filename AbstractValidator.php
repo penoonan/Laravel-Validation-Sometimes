@@ -1,10 +1,8 @@
 <?php
 
-namespace Estimator\Service\Validation;
+use Illuminate\Validation\Factory;
 
-use Illuminate\Validation\Factory as Validator;
-
-abstract class AbstractLaravelValidator implements ValidableInterface {
+abstract class AbstractValidator implements ValidatorInterface {
 
     /**
      * Validator
@@ -53,7 +51,7 @@ abstract class AbstractLaravelValidator implements ValidableInterface {
 
     /**
      * @param array $data
-     * @return $this|ValidableInterface
+     * @return $this
      */
     public function with(array $data)
     {
@@ -93,20 +91,11 @@ abstract class AbstractLaravelValidator implements ValidableInterface {
 
     /**
      * Return errors, if any
-     *
      * @return array
      */
     public function errors()
     {
         return $this->errors;
-    }
-
-    /**
-     *
-     */
-    public function sometimes($sometimes)
-    {
-      $this->sometimes[] = $sometimes;
     }
 
 }

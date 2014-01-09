@@ -42,7 +42,7 @@ Unlike defining rules and messages or even extending the Validator class with cu
         return true;
     }
 
-See the problem? The validator is "made" (that is, the `make()` method is invoked on the injected factory instance), and it instantly calls `passes()` --- well, in this case, it calls `fails()`.  The entire body of the `fails()` function is `return !passes();`. So it's the same diff.
+See the problem? The validator is "made" (that is, the `make()` method is invoked on the injected factory instance), and it instantly calls `passes()` --- well, technically in this case, it calls `fails()`.  But the entire body of the `fails()` function is `return !passes();`, So it's the same diff.
 
 ###A closer look at `sometimes()`
 

@@ -1,6 +1,6 @@
 ##Decoupled Validation With Laravel's `sometimes()` method
 
-I learned a ton reading Chris Fidao's book "Implementing Laravel", and I followed his pattern for form validation very closely in building my first significant Laravel 4 application. Actually, it's the first significant application I've built from the ground up in any framework *whatsoever*, so it feels like my baby and I'm proud of every step it takes. 
+I learned a ton reading Chris Fidao's book "[Implementing Laravel](https://leanpub.com/implementinglaravel)", and I followed his pattern for form validation very closely in building my first significant Laravel 4 application. Actually, it's the first significant application I've built from the ground up in any framework *whatsoever*, so it feels like my baby and I'm proud of every step it takes. 
 
 Of course, sooner or later it was bound to happen that I'd run into a problem that wasn't covered by the thing I copied out of a book. And so it came to pass. The problem was, I needed to use the `sometimes()` method of Laravel's validation class, and I was finding it tough to wrap my head around how to make it happen.
 
@@ -10,7 +10,7 @@ If you don't know, it's not tough to grasp. [Read this quick](http://laravel.com
 
 ###Getting Started
 
-First I should explain the pattern as originally sketched out in the book (without, I hope, giving away too much of a copyrighted work that [you should definitely buy yourself](www.link.com) if any of this sounds unfamiliar to you. Some class names have been changed to protect the identities of those involved. 
+First I should explain the pattern as originally sketched out in the book (without, I hope, giving away too much of a copyrighted work that [you should definitely buy yourself](https://leanpub.com/implementinglaravel) if any of this sounds unfamiliar to you. Some class names have been changed to protect the identities of those involved. 
 
 It starts with the basic pattern of interface -> abstract class -> concrete implementation: ValidatorInterface, an AbstractValidator which implements it, and a ConcreteValidator that extends the abstract class. The idea is simply to provide decoupled, dependency-injected access to Laravel's built-in Validation class. As a result, the methods defined in ValidatorInterface are just `with()`, `passes()` and `errors()` - the most basic methods of that class and the ones whose functionality should be shared by *other* validation classes in the event you find yourself needing to swap in something new. 
 

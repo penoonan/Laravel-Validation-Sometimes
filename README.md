@@ -67,9 +67,9 @@ Each `$sometimes` rule needs to contain all the parameters that the `sometimes()
 
     protected $sometimes = array(
         array(
-            'field' => 'last_name',
+            'field' => 'middle_name',
             'rule' => 'required',
-            'callback' => 'checkLastNameIsRequired'
+            'callback' => 'checkMiddleNameIsRequired'
         ),
     );
 

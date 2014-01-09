@@ -1,14 +1,14 @@
-#Decoupled Validation With Laravel's `sometimes()` method
+##Decoupled Validation With Laravel's `sometimes()` method
 
 I learned a ton reading Chris Fidao's book "Implementing Laravel", and I followed his pattern for form validation very closely in building my first significant Laravel 4 application. Actually, it's the first significant application I've built from the ground up in any framework *whatsoever*, so it feels like my baby and I'm proud of every step it takes. 
 
 Of course, sooner or later it was bound to happen that I'd run into a problem that wasn't covered by the thing I copied out of a book. And so it came to pass. The problem was, I needed to use the `sometimes()` method of Laravel's validation class, and I was finding it tough to wrap my head around how to make it happen.
 
-##What does `sometimes()` do?
+###What does `sometimes()` do?
 
 If you don't know, it's not tough to grasp. [Read this quick](http://laravel.com/docs/validation#conditionally-adding-rules) and come back when you're done.
 
-##Getting Started
+###Getting Started
 
 First I should explain the pattern as originally sketched out in the book (without, I hope, giving away too much of a copyrighted work that [you should definitely buy yourself](www.link.com) if any of this sounds unfamiliar to you. Some class names have been changed to protect the identities of those involved. 
 
@@ -18,7 +18,7 @@ AbstractValidator implements all the methods defined in ValidatorInterface, and 
 
 In Fidao's example, ConcreteValidator's `$rules` and `$messages` are simply defined as default class property values. The class uses constructor injection to pass an instance of Illuminate\Validation\Factory (which it acquires via a Laravel service provider) to its parent AbstractValidator. The AbstractValidator doesn't actually create a concrete Validator instance until ConcreteValidator runs its `passes()` method. It would be hard to change that without diminishing the elegance of the AbstractValidator API --- and therein lay the problem.
 
-##When is `sometimes()`?
+###When is `sometimes()`?
 
 Unlike defining rules and messages or even extending the Validator class with custom rules of your own, the `sometimes()` method cannot be called on the Validator Factory - it can only be called on a concrete instance of the class. But since AbstractValidator only called `make()` *inside the `passes()`* method, there was no simply no room for ConcreteValidator to insert a call to `sometimes()`. Let's take a peek:
 
@@ -40,7 +40,7 @@ Unlike defining rules and messages or even extending the Validator class with cu
 
 The validator is made (that is, the `make()` method is invoked on the injected factory instance), and it instantly calls `passes()` --- well, in this case, it calls `fails()`.  The entire body of the `fails()` function is `return !passes();`. So it's the same diff.
 
-##A closer look at `sometimes()`
+###A closer look at `sometimes()`
 
 Let's take a closer look at the usage of that `sometimes()` function, shall we:
 
@@ -51,7 +51,7 @@ Let's take a closer look at the usage of that `sometimes()` function, shall we:
 
 We can see that it accepts three parameters: the first indicates the field(s) to be validated against, the second contains the name of the validation rule to be applied, and the third is a closure or callback containing the logic that defines when the specified rule is to be applied. Note that the callback receives a single parameter `$input` - that's *all* the user input you've passed into the validator via the `$data`. 
 
-##An Implementation
+###An Implementation
 
 I decided to create an implementation that would follow Fidao's example as closely as possible, so that `sometimes()` rules could be implemented right alongside normal rules and messages. The first step was to initialize a variable named `$sometimes` inside the AbstractValidator class. It would need to be able to contain multiple `sometimes()` rules, so an array seemed like a good choice:
 

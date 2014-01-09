@@ -79,10 +79,16 @@ Each `$sometimes` rule needs to contain all the parameters that the `sometimes()
 
 But there's still a little magic left to be done! ConcreteValidator needs to implement that callback - we can do it just like this:
 
-    public function exampleCallback($input)
-    {
-        return true === true ? true : false;  //Why not?
-    }
+    /**
+     * The first name is required, and we only need the middle name if the last name was also given.
+     * Yes, that is absurd.
+     * @param $input
+     * @return boolean
+     */
+     public function checkMiddleNameIsRequired($input)
+     {
+         return isset($input->last_name);
+     }
 
 Finally, we need to tell the AbstractValidator how to handle any `sometimes()` rules that may be present in one of its concrete implementations. I chose to accomplish that by modifying the `passes()` method thusly:
 

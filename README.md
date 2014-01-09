@@ -14,7 +14,11 @@ First I should explain the pattern as originally sketched out in the book (witho
 
 It starts with the basic pattern of interface -> abstract class -> concrete implementation: ValidatorInterface, an AbstractValidator which implements it, and a ConcreteValidator that extends the abstract class. The idea is simply to provide decoupled, dependency-injected access to Laravel's built-in Validation class. As a result, the methods defined in ValidatorInterface are just `with()`, `passes()` and `errors()` - the most basic methods of that class and the ones whose functionality should be shared by *other* validation classes in the event you find yourself needing to swap in something new. 
 
-AbstractValidator implements all the methods defined in ValidatorInterface, and any concrete implementations are able to start from that base and add whatever their specific implementation requires. This decoupled approach is different from what you'll see in Laravel's docs on Validation. There, you'll see how to use the Validator facade to spin up an instant validator, roughly like so: `$validator = Validator::make($data, $rules, $messages);` It's a great approach, but if you found yourself needing to swap in a new validator, you'd be out of luck *unless* it happened to share an interface with Laravel's. Not likely.
+AbstractValidator implements all the methods defined in ValidatorInterface, and any concrete implementations are able to start from that base and add whatever their specific implementation requires. This decoupled approach is different from what you'll see in Laravel's docs on Validation. There, you'll see how to use the Validator facade to spin up an instant validator, roughly like so: 
+
+    $validator = Validator::make($data, $rules, $messages); 
+
+It's a great approach, but if you found yourself needing to swap in a new validator, you'd be out of luck *unless* it happened to share an interface with Laravel's. Not likely.
 
 In Fidao's example, ConcreteValidator's `$rules` and `$messages` are simply defined as default class property values. The class uses constructor injection to pass an instance of Illuminate\Validation\Factory (which it acquires via a Laravel service provider) to its parent AbstractValidator. The AbstractValidator doesn't actually create a concrete Validator instance until ConcreteValidator runs its `passes()` method. It would be hard to change that without diminishing the elegance of the AbstractValidator API --- and therein lay the problem.
 
